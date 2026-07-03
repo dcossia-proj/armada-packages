@@ -149,7 +149,8 @@ Requires:       %{name}-filesystem = %{version}-%{release}
 Recommends:     %{name}-thunks = %{version}-%{release}
 %endif
 
-Recommends:     fex-emu-rootfs-fedora
+# Fedora rootfs does not work with the Proton/pressure-vessel path.
+# Recommends:     fex-emu-rootfs-fedora
 # erofs-fuse is REQUIRED, not recommended: FEXServer execvpe's `erofsfuse`
 # at startup to mount the rootfs. Absent binary → exec fails → Logger's
 # std::thread destructs unjoined → terminate(). Upstream Fedora's spec
@@ -235,6 +236,10 @@ sed -i FEXCore/Source/CMakeLists.txt \
   CPPINC="/$(cd sysroot; ls -d usr/include/c++/*)"
   sed -i "s,%%CPPINC%%,$CPPINC,g" toolchain_*.cmake
 %endif
+
+# Disable pac-ret for FEX JIT compatibility; -O3 matches upstream FEX.
+%global build_cflags %{build_cflags} -mbranch-protection=none -O3
+%global build_cxxflags %{build_cxxflags} -mbranch-protection=none -O3
 
 %build
 %cmake -G Ninja \
