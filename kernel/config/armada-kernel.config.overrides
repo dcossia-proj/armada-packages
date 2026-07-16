@@ -134,6 +134,10 @@ CONFIG_TOUCHSCREEN_SYNAPTICS_DSX=m
 
 # ============== LEDs / RGB ==============
 CONFIG_LEDS_HTR3212=m
+# Binds the DTS leds-group-multicolor nodes (multi-ledl1..4/multi-ledr1..4 on
+# Thor); without it those nodes never get a driver and no LED sysfs entries
+# are created at all, regardless of userspace discovery logic.
+CONFIG_LEDS_GROUP_MULTICOLOR=m
 
 # ============== Haptics ==============
 CONFIG_INPUT_QCOM_HV_HAPTICS=m              # required by common.dtsi
