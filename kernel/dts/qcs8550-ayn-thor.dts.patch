@@ -23,24 +23,3 @@ From: virtudude <virtudude@protonmail.com>
  		#address-cells = <1>;
  		#size-cells = <0>;
  
-@@ -397,9 +397,10 @@
- 	};
- };
- 
-+/* bottom panel disabled; armada drives only the primary */
- &mdss_dsi0 {
- 	vdda-supply = <&vreg_l3e_1p2>;
--	status = "okay";
-+	status = "disabled";
- 
- 	panel@0 {
- 		reg = <0>;
-@@ -433,7 +434,7 @@
- 
- &mdss_dsi0_phy {
- 	vdds-supply = <&vreg_l1e_0p88>;
--	status = "okay";
-+	status = "disabled";
- };
- 
- &mdss_dsi1_out {
